@@ -24,8 +24,8 @@ Set as a dep in your mix.exs and ensure it is running with your app:
       {:phoenix, "0.5.0"},
       {:cowboy, "~> 1.0.0"},
       #...
-      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.0"},
-      {:exrecaptcha, "~> 0.0.3"}
+      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
+      {:exrecaptcha, "~> 0.0.4"}
     ]
   end
 ```
@@ -89,6 +89,7 @@ end
 
 ## Changelog
 
+- 0.0.4: Update ibrowse dependency, to build under R18
 - 0.0.3: Update HTTPotion dependency, avoiding elixir version warnings
 - 0.0.2: Use HTTPS by default
 - 0.0.1: Initial release

@@ -3,7 +3,7 @@ defmodule Exrecaptcha.Mixfile do
 
   def project do
     [app: :exrecaptcha,
-     version: "0.0.3",
+     version: "0.0.4",
      elixir: "~> 1.0.0",
      description: description,
      deps: deps,
@@ -23,7 +23,7 @@ defmodule Exrecaptcha.Mixfile do
 
   defp deps do
     [
-      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.0"},
+      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
       {:httpotion, "~> 1.0.0"}
     ]
   end
