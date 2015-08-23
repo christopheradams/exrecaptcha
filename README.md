@@ -21,7 +21,7 @@ Set as a dep in your mix.exs and ensure it is running with your app:
 
   defp deps do
     [
-      {:phoenix, "0.5.0"},
+      {:phoenix, "~> 0.17"},
       {:cowboy, "~> 1.0.0"},
       #...
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
@@ -56,11 +56,11 @@ You can use https instead of http for the `verify_url`.
 Put this code somewhere in your html template:
 
 ```html
-<form id="loginForm" name="newuser" method="post" action="/users">
+<%= form_for @conn, user_path(@conn, :create), [name: :register], fn f -> %>
   ...
-  <%= safe Exrecaptcha.display %>
+  <%= raw Exrecaptcha.display %>
   ...
-</form>
+<% end %>
 ```
 
 ### Controller
