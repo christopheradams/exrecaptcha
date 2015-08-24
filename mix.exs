@@ -23,6 +23,7 @@ defmodule Exrecaptcha.Mixfile do
 
   defp deps do
     [
+      {:exvcr, "~> 0.5", only: [:test]},
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
       {:httpotion, "~> 2.1"}
     ]
