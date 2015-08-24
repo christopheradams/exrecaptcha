@@ -25,7 +25,7 @@ Set as a dep in your mix.exs and ensure it is running with your app:
       {:cowboy, "~> 1.0.0"},
       #...
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
-      {:exrecaptcha, "~> 0.0.4"}
+      {:exrecaptcha, "~> 0.0.5"}
     ]
   end
 ```
@@ -56,7 +56,7 @@ You can use https instead of http for the `verify_url`.
 Put this code somewhere in your html template:
 
 ```html
-<%= form_for @conn, user_path(@conn, :create), [name: :register], fn f -> %>
+<%= form_for @conn, "/users", [name: :recaptcha], fn f -> %>
   ...
   <%= raw Exrecaptcha.display %>
   ...
@@ -85,10 +85,11 @@ end
 
 - No option for recaptcha display can be set yet
 - Error handling is quite inexistent (throws RuntimeError)
-- No tests
+- Support Recaptcha Version 2.0
 
 ## Changelog
 
+- 0.0.5: Update HTTPotion, Add tests
 - 0.0.4: Update ibrowse dependency, to build under R18
 - 0.0.3: Update HTTPotion dependency, avoiding elixir version warnings
 - 0.0.2: Use HTTPS by default
