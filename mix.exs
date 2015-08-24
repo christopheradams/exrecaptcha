@@ -24,7 +24,7 @@ defmodule Exrecaptcha.Mixfile do
   defp deps do
     [
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
-      {:httpotion, "~> 1.0.0"}
+      {:httpotion, "~> 2.1"}
     ]
   end
 

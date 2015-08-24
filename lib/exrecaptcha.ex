@@ -16,10 +16,14 @@ defmodule Exrecaptcha do
                                "remoteip" => to_string(remote_ip),
                                "challenge" => challenge,
                                "response" => response})
-    IO.inspect query
+
     headers = ["Content-type": "application/x-www-form-urlencoded",
                "User-agent": "reCAPTCHA Elixir"]
-    %{:body => body} = HTTPotion.post conf.verify_url, query, headers
+    request_url = conf.verify_url <> "?" <> query
+
+    response = HTTPotion.post request_url, [headers: headers]
+    %{:body => body} = response
+
     check_result String.split(body)
   end
 
