@@ -9,11 +9,11 @@ defmodule Exrecaptcha do
   end
 
   def verify(remote_ip, challenge, response) when is_tuple(remote_ip) do
-    verify(:inet_parse.ntoa(remote_ip), challenge, response)
+    verify(to_string(:inet_parse.ntoa(remote_ip)), challenge, response)
   end
   def verify(remote_ip, challenge, response) do
     query = URI.encode_query(%{"privatekey" => conf.private_key,
-                               "remoteip" => to_string(remote_ip),
+                               "remoteip" => remote_ip,
                                "challenge" => challenge,
                                "response" => response})
 
