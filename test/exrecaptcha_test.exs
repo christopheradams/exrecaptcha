@@ -2,7 +2,7 @@ defmodule ExrecaptchaTest do
   use ExUnit.Case
   use ExVCR.Mock
 
-  test "verify returns :ok if sent successfully" do
+  test "verify returns {:ok, reason} if recaptcha verification succeeded" do
 
     remote_ip = {127, 0, 0, 0}
     challenge = "CHALLENGE"
@@ -16,12 +16,12 @@ defmodule ExrecaptchaTest do
                          status_code: 200,
                          body: response_body] do
 
-      success = Exrecaptcha.verify(remote_ip, challenge, response)
-      assert :ok = success
+      response = Exrecaptcha.verify(remote_ip, challenge, response)
+      assert {:ok, "success"} = response
     end
   end
 
-  test "verify raises error if sent unsuccessfully" do
+  test "verify returns {:error, reason} if recaptcha verification failed" do
 
     remote_ip = {127, 0, 0, 0}
     challenge = "CHALLENGE"
@@ -35,9 +35,8 @@ defmodule ExrecaptchaTest do
                          status_code: 200,
                          body: response_body] do
 
-      assert_raise RuntimeError, "incorrect-captcha-sol", fn ->
-        Exrecaptcha.verify(remote_ip, challenge, response)
-      end
+      response = Exrecaptcha.verify(remote_ip, challenge, response)
+      assert {:error, "incorrect-captcha-sol"} = response
     end
   end
 

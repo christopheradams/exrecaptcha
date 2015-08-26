@@ -21,8 +21,8 @@ defmodule Exrecaptcha do
                "User-agent": "reCAPTCHA Elixir"]
     request_url = conf.verify_url <> "?" <> query
 
-    response = HTTPotion.post request_url, [headers: headers]
-    %{:body => body} = response
+    http_response = HTTPotion.post request_url, [headers: headers]
+    %{:body => body} = http_response
 
     check_result String.split(body)
   end
@@ -31,11 +31,11 @@ defmodule Exrecaptcha do
     Application.get_env(:exrecaptcha, :api_config)
   end
 
-  defp check_result(["true", _reason]) do
-    :ok
+  defp check_result(["true", result]) do
+    {:ok, result}
   end
   defp check_result(["false", reason]) do
-    raise RuntimeError, message: reason
+    {:error, reason}
   end
 
 end

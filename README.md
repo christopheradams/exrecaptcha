@@ -25,7 +25,7 @@ Set as a dep in your mix.exs and ensure it is running with your app:
       {:cowboy, "~> 1.0.0"},
       #...
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
-      {:exrecaptcha, "~> 0.0.5"}
+      {:exrecaptcha, "~> 0.0.6"}
     ]
   end
 ```
@@ -71,7 +71,10 @@ Provided you've set the routing properly, you just have to call
 # your post method should route you here:
 def create(conn, params) do
   # do stuff, then check for the validity of the captcha
-  :ok = verify_captcha(conn, params)
+  case verify_captcha(conn, params) do
+    {:ok, result} -> "The captcha was correct"
+    {:error, reason} -> "The captcha had an error: #{reason}"
+  end
 end
 
 defp verify_captcha(conn, %{"recaptcha_challenge_field" => challenge,
@@ -84,11 +87,11 @@ end
 ##TODO
 
 - No option for recaptcha display can be set yet
-- Error handling is quite inexistent (throws RuntimeError)
 - Support Recaptcha Version 2.0
 
 ## Changelog
 
+- 0.0.6: Change verify to return standard `:ok` or `:error` tuples
 - 0.0.5: Update HTTPotion, Add tests
 - 0.0.4: Update ibrowse dependency, to build under R18
 - 0.0.3: Update HTTPotion dependency, avoiding elixir version warnings
